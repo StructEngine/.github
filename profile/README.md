@@ -11,4 +11,4 @@
 🧙 Remember, you can do mighty things with the power of [Markdown](https://docs.github.com/github/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax)
 -->
 
-如你所见，这里是Token竞技场
+如你所见，这里是可以将一切现实物体和创作想法搬进Minecraft的快速创作平台
