@@ -1,8 +1,12 @@
-# StructEngine
+<p align="center">
+  <img src="logo.png" alt="StructEngine Logo" width="240">
+</p>
 
-**现实与体素的边界引擎 | 声明式 AI 自动化构建系统**
+<h1 align="center">StructEngine</h1>
 
-StructEngine 是一个致力于打破现实数据、AI 算力与 Minecraft 物理空间边界的开源底层引擎生态。基于“云端算力调度 + 边缘无状态执行”的解耦架构，将自然语言（Prompt）、2D/3D 空间数据（Google Street/Earth）直接编译、降维并投影为游戏内精确的三维方块结构。
+<p align="center"><strong>现实与体素的边界引擎 | 声明式 AI 自动化构建系统</strong></p>
+
+StructEngine 是一个致力于打破现实数据、AI 算力与 Minecraft 物理空间边界的开源底层引擎生态。基于“云端算力调度 + 边缘无状态执行”的解耦架构，将自然语言（Prompt）与地图空间坐标（BlueMap）直接编译、降维并投影为游戏内精确的三维方块结构。
 
 我们坚信“言出法随，万物皆可体素化”的极客美学。
 
@@ -26,10 +30,9 @@ StructEngine 摒弃了传统的“重度游戏插件”开发模式，采用了�
 
 整个生态的“大脑”。负责接收外部输入、统筹计算并将构建指令下发给各个 Minecraft 服务器节点。
 
-* **前端引擎**：基于 Vue 3 + Element Plus，深度集成 Squaremap（Leaflet），实现强制像素化渲染（Pixelated）的上帝视角 2D 地图与精确的方块级选址。
+* **前端引擎**：基于 Vue 3 + Element Plus，深度集成 BlueMap 前端 API，以上帝视角地图完成精确的方块级选址与构建结果的可视化预览。
 * **后端调度**：基于 Spring Boot 3 + JDK 21 虚拟线程。零阻塞处理高并发 WebSocket RPC 调用，统筹游戏服 Y 轴高度探测与 AI 生成流转。
 * **AI 算力**：集成 Spring AI，处理多模态提示词（Prompt）与 JSON 结构化空间模型生成。
-* **街景解析 (`google-street` 模块)**：集成 JglTF 与 JOML，利用纯 Java 并发解析 Google Photorealistic 3D Tiles 模型，将其降维体素化并输出至游戏世界（开发中）。
 
 ### 2. [StructEngine](https://github.com/StructEngine/StructEngine)
 
@@ -49,11 +52,11 @@ StructEngine 摒弃了传统的“重度游戏插件”开发模式，采用了�
 * **Frameworks (Web)**: Spring Boot 3.2+, Vue 3.x, Spring AI
 * **Frameworks (Game)**: Fabric API, Paper API, NeoForge
 * **Build Tools**: Maven (Platform), Gradle (Plugin)
-* **3D / Map**: Leaflet.js, JglTF, JOML
+* **Map / 3D**: BlueMap, JOML
 
 ## 💡 工作流演示 (Workflow)
 
-1. **Targeting (选址)**: Web 侧管理员在 Squaremap 地图上点击目标方块，录入提示词（如“生成一座中式塔楼”）。
+1. **Targeting (选址)**: Web 侧管理员在 BlueMap 地图上点击目标位置，录入提示词（如“生成一座中式塔楼”）。
 2. **Probing (探测)**: Platform 挂起虚拟线程，通过 WebSocket 向游戏端发起 `QUERY_Y` RPC 调用，游戏端在主线程拿到地表精确高度后秒回。
 3. **Compiling (编译)**: Platform 将完整的 `(X, Y, Z)` 绝对坐标送入模型生成管线，落盘生成 `.json` 体素数据流。
 4. **Executing (执行)**: Platform 下发 `BUILD` 指令，游戏端插件下载数据、压入队列，在玩家眼前平滑地将建筑渲染成型。
